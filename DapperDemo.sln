@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DapperDemo", "DapperDemo\Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DapperDemo.Data", "DapperDemo.Data\DapperDemo.Data.csproj", "{CE491DB1-45DE-4CAD-BED4-7897375380F9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DapperDemo.WPF", "DapperDemo.WPF\DapperDemo.WPF.csproj", "{AA75E5EF-2FBA-4EF2-8422-F6ED7F5A6C44}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{CE491DB1-45DE-4CAD-BED4-7897375380F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE491DB1-45DE-4CAD-BED4-7897375380F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE491DB1-45DE-4CAD-BED4-7897375380F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA75E5EF-2FBA-4EF2-8422-F6ED7F5A6C44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA75E5EF-2FBA-4EF2-8422-F6ED7F5A6C44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA75E5EF-2FBA-4EF2-8422-F6ED7F5A6C44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA75E5EF-2FBA-4EF2-8422-F6ED7F5A6C44}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
