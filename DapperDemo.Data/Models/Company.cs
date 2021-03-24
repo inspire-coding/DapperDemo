@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DapperDemo.Models
+namespace DapperDemo.Data.Models
 {
     [Table("Companies")]
     public class Company

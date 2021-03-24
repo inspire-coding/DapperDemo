@@ -5,9 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Threading.Tasks;
 
-namespace DapperDemo.Repository
+namespace DapperDemo.Data.Repository
 {
     public class DapperSprocRepo : IDapperSprocRepo
     {
@@ -57,7 +56,7 @@ namespace DapperDemo.Repository
                     return result.FirstOrDefault();
             }
 
-            return default(T);
+            return default;
         }
 
 

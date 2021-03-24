@@ -1,8 +1,7 @@
-﻿using DapperDemo.Models;
-using DapperDemo.Repository;
+﻿using DapperDemo.Data.Models;
+using DapperDemo.Data.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

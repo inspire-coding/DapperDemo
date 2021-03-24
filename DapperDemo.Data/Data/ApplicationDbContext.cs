@@ -1,11 +1,11 @@
-﻿using DapperDemo.Models;
+﻿using DapperDemo.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DapperDemo.Data
+namespace DapperDemo.Data.Data
 {
     public class ApplicationDbContext : DbContext
     {

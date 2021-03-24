@@ -1,15 +1,14 @@
 ﻿using Dapper;
-using DapperDemo.Models;
+using DapperDemo.Data.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Transactions;
 
-namespace DapperDemo.Repository
+namespace DapperDemo.Data.Repository
 {
     public class BonusRepository : IBonusRepository
     {
@@ -17,7 +16,7 @@ namespace DapperDemo.Repository
 
         public BonusRepository(IConfiguration configuration)
         {
-            this.db = new SqlConnection(configuration.GetConnectionString("DefaultConnection"));
+            db = new SqlConnection(configuration.GetConnectionString("DefaultConnection"));
         }
 
         public void AddTestCompanyWithEmployee(Company objComp)
@@ -88,7 +87,8 @@ namespace DapperDemo.Repository
 
             var companyDic = new Dictionary<int, Company>();
 
-            var company = db.Query<Company, Employee, Company>(sql, (c, e) => {
+            var company = db.Query<Company, Employee, Company>(sql, (c, e) =>
+            {
                 if (!companyDic.TryGetValue(c.CompanyId, out var currentCompany))
                 {
                     currentCompany = c;
@@ -142,7 +142,7 @@ namespace DapperDemo.Repository
 
         public void RemoveRange(int[] companyId)
         {
-            db.Query("DELETE FROM Companies WHERE CompanyId IN @companyId", new { companyId } );
+            db.Query("DELETE FROM Companies WHERE CompanyId IN @companyId", new { companyId });
         }
 
         public List<Company> FilterCompanyByName(string name)

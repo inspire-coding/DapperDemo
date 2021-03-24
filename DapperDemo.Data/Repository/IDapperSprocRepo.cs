@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DapperDemo.Repository
+namespace DapperDemo.Data.Repository
 {
     public interface IDapperSprocRepo
     {

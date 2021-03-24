@@ -1,16 +1,12 @@
-﻿using Dapper;
-using Dapper.Contrib.Extensions;
-using DapperDemo.Data;
-using DapperDemo.Models;
+﻿using Dapper.Contrib.Extensions;
+using DapperDemo.Data.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Threading.Tasks;
 
-namespace DapperDemo.Repository
+namespace DapperDemo.Data.Repository
 {
     public class CompanyRepositoryContrib : ICompanyRepository
     {
@@ -18,7 +14,7 @@ namespace DapperDemo.Repository
 
         public CompanyRepositoryContrib(IConfiguration configuration)
         {
-            this.db = new SqlConnection(configuration.GetConnectionString("DefaultConnection"));
+            db = new SqlConnection(configuration.GetConnectionString("DefaultConnection"));
         }
 
 

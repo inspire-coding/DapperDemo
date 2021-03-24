@@ -1,12 +1,12 @@
-﻿using DapperDemo.Models;
-using DapperDemo.Repository;
+﻿using DapperDemo.Data.Models;
+using DapperDemo.Data.Repository;
+using DapperDemo.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace DapperDemo.Controllers
 {
