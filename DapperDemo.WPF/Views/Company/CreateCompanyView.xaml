@@ -1,0 +1,131 @@
+﻿<UserControl x:Class="DapperDemo.WPF.Views.Company.CreateCompanyView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DapperDemo.WPF.Views.Company"
+             mc:Ignorable="d" 
+             Background="White"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid MaxWidth="1600" Margin="5 0 0 0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Create Company" FontSize="36" FontWeight="Bold" />
+
+        <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Left" Margin="0 20 0 0 ">
+            <TextBlock Text="Name" FontSize="12" Foreground="Gray" />
+            <TextBox Width="200" FontSize="12" Padding="0 3 0 3" >
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Vertical" HorizontalAlignment="Left" Margin="0 20 0 0 ">
+            <TextBlock Text="Address" FontSize="12" Foreground="Gray" />
+            <TextBox Width="200" FontSize="12" Padding="5" >
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Orientation="Vertical" HorizontalAlignment="Left" Margin="0 20 0 0 ">
+            <TextBlock Text="City" FontSize="12" Foreground="Gray" />
+            <TextBox Width="200" FontSize="12" Padding="5" >
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="4" Orientation="Vertical" HorizontalAlignment="Left" Margin="0 20 0 0 ">
+            <TextBlock Text="State" FontSize="12" Foreground="Gray" />
+            <TextBox Width="200" FontSize="12" Padding="5" >
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="5" Orientation="Vertical" HorizontalAlignment="Left" Margin="0 20 0 0 ">
+            <TextBlock Text="PostalCode" FontSize="12" Foreground="Gray" />
+            <TextBox Width="200" FontSize="12" Padding="5" >
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0 20 0 0">
+            <Button Content="Create"
+                    Foreground="White"
+                    FontSize="12"
+                    Margin="0 20 0 20">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#1b6fc2" />
+                        <Setter Property="Cursor" Value="Hand" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#1661ab" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="100" Height="35" CornerRadius="4" Background="{TemplateBinding Background}" >
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            
+            <Button Content="Back to List"
+                    Foreground="Black"
+                    FontSize="12"
+                    Margin="20 20 0 20">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#ffc107" />
+                        <Setter Property="Cursor" Value="Hand" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#d4a004" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="100" Height="35" CornerRadius="4" Background="{TemplateBinding Background}" >
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            
+        </StackPanel>
+
+    </Grid>
+</UserControl>

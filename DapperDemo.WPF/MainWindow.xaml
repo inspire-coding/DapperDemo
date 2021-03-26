@@ -4,9 +4,27 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DapperDemo.WPF"
+        xmlns:controls="clr-namespace:DapperDemo.WPF.Controls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Title="MainWindow" Height="800" Width="1200">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <controls:NavigationBar 
+            Grid.Row="0" 
+            MouseDown="NavigationBar_MouseDown"
+            MouseDoubleClick="NavigationBar_MouseDoubleClick" />
+
+        <ScrollViewer Grid.Row="1"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled">
+            <ContentControl Content="{Binding CurrentViewModel}" />
+        </ScrollViewer>
 
     </Grid>
 </Window>

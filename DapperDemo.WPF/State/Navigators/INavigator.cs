@@ -7,7 +7,9 @@ namespace DapperDemo.WPF.State.Navigators
 {
     public enum ViewType
     {
-        Home
+        Home,
+        Company,
+        CreateCompany
     }
 
     public interface INavigator
