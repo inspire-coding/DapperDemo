@@ -11,13 +11,17 @@ namespace DapperDemo.WPF.ViewModels.CompanyVM
     public class CompanyViewModel : ViewModelBase
     {
         private readonly ICompanyRepository _compRepo;
+
         private readonly ObservableCollection<Company> _companies;
+        public IEnumerable<Company> Companies => _companies;
 
 
         public ICommand AddCompanyCommand { get; }
 
 
-        public IEnumerable<Company> Companies => _companies;
+
+
+
         public CompanyViewModel(ICompanyRepository compRepo, IRenavigator navigateToAddView)
         {
             _compRepo = compRepo;
