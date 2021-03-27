@@ -1,5 +1,6 @@
 ﻿using DapperDemo.Data.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DapperDemo.Data.Repository
 {
@@ -8,7 +9,7 @@ namespace DapperDemo.Data.Repository
         Company Find(int id);
         List<Company> GetAll();
 
-        Company Add(Company company);
+        Task<Company> Add(Company company);
         Company Update(Company company);
         void Remove(int id);
     }

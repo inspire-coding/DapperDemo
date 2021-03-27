@@ -23,7 +23,8 @@
 
         <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Left" Margin="0 20 0 0 ">
             <TextBlock Text="Name" FontSize="12" Foreground="Gray" />
-            <TextBox Width="200" FontSize="12" Padding="0 3 0 3" >
+            <TextBox Width="200" FontSize="12" Padding="0 3 0 3" 
+                     Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" >
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>
@@ -34,7 +35,8 @@
 
         <StackPanel Grid.Row="2" Orientation="Vertical" HorizontalAlignment="Left" Margin="0 20 0 0 ">
             <TextBlock Text="Address" FontSize="12" Foreground="Gray" />
-            <TextBox Width="200" FontSize="12" Padding="5" >
+            <TextBox Width="200" FontSize="12" Padding="5" 
+                     Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}" >
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>
@@ -45,7 +47,8 @@
 
         <StackPanel Grid.Row="3" Orientation="Vertical" HorizontalAlignment="Left" Margin="0 20 0 0 ">
             <TextBlock Text="City" FontSize="12" Foreground="Gray" />
-            <TextBox Width="200" FontSize="12" Padding="5" >
+            <TextBox Width="200" FontSize="12" Padding="5" 
+                     Text="{Binding City, UpdateSourceTrigger=PropertyChanged}" >
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>
@@ -56,7 +59,8 @@
 
         <StackPanel Grid.Row="4" Orientation="Vertical" HorizontalAlignment="Left" Margin="0 20 0 0 ">
             <TextBlock Text="State" FontSize="12" Foreground="Gray" />
-            <TextBox Width="200" FontSize="12" Padding="5" >
+            <TextBox Width="200" FontSize="12" Padding="5" 
+                     Text="{Binding State, UpdateSourceTrigger=PropertyChanged}" >
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>
@@ -67,7 +71,8 @@
 
         <StackPanel Grid.Row="5" Orientation="Vertical" HorizontalAlignment="Left" Margin="0 20 0 0 ">
             <TextBlock Text="PostalCode" FontSize="12" Foreground="Gray" />
-            <TextBox Width="200" FontSize="12" Padding="5" >
+            <TextBox Width="200" FontSize="12" Padding="5" 
+                     Text="{Binding PostalCode, UpdateSourceTrigger=PropertyChanged}" >
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>
@@ -80,6 +85,7 @@
             <Button Content="Create"
                     Foreground="White"
                     FontSize="12"
+                    Command="{Binding AddCompanyCommand}"
                     Margin="0 20 0 20">
                 <Button.Style>
                     <Style TargetType="Button">
@@ -88,6 +94,10 @@
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Background" Value="#1661ab" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="LightGray" />
+                                <Setter Property="Foreground" Value="Gray" />
                             </Trigger>
                         </Style.Triggers>
                     </Style>

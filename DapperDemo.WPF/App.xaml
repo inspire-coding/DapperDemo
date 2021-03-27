@@ -16,7 +16,7 @@
         <DataTemplate DataType="{x:Type viewmodelsCompany:CompanyViewModel}">
             <viewCompany:CompanyView />
         </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodelsCompany:CreateCompanyViewModel}">
+        <DataTemplate DataType="{x:Type viewmodelsCompany:UpsertCompanyViewModel}">
             <viewCompany:CreateCompanyView />
         </DataTemplate>
 

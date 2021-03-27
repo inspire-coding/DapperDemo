@@ -23,12 +23,12 @@ namespace DapperDemo.WPF.HostBuilders
 
                 services.AddSingleton<CreateViewModel<HomeViewModel>>(services => () => services.GetRequiredService<HomeViewModel>());
                 services.AddSingleton<CreateViewModel<CompanyViewModel>>(services => () => CreateCompanyViewModel(services));
-                services.AddSingleton<CreateViewModel<CreateCompanyViewModel>>(services => () => CreateCreateCompanyViewModel(services));
+                services.AddSingleton<CreateViewModel<UpsertCompanyViewModel>>(services => () => CreateCreateCompanyViewModel(services));
 
                 services.AddSingleton<IViewModelFactory, ViewModelFactory>();
 
                 services.AddSingleton<ViewModelDelegateRenavigator<CompanyViewModel>>();
-                services.AddSingleton<ViewModelDelegateRenavigator<CreateCompanyViewModel>>();
+                services.AddSingleton<ViewModelDelegateRenavigator<UpsertCompanyViewModel>>();
             });
 
             return host;
@@ -38,12 +38,12 @@ namespace DapperDemo.WPF.HostBuilders
         {
             return new CompanyViewModel(
                 services.GetRequiredService<ICompanyRepository>(), 
-                services.GetRequiredService<ViewModelDelegateRenavigator<CreateCompanyViewModel>>());
+                services.GetRequiredService<ViewModelDelegateRenavigator<UpsertCompanyViewModel>>());
         }
 
-        private static CreateCompanyViewModel CreateCreateCompanyViewModel(IServiceProvider service)
+        private static UpsertCompanyViewModel CreateCreateCompanyViewModel(IServiceProvider service)
         {
-            return new CreateCompanyViewModel(
+            return new UpsertCompanyViewModel(
                 service.GetRequiredService<ICompanyRepository>(),
                 service.GetRequiredService<ViewModelDelegateRenavigator<CompanyViewModel>>());
         }

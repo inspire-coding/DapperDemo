@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DapperDemo.Data.Repository
 {
@@ -20,7 +21,7 @@ namespace DapperDemo.Data.Repository
 
 
 
-        public Company Add(Company company)
+        public async Task<Company> Add(Company company)
         {
             var parameters = new DynamicParameters();
 
@@ -31,7 +32,7 @@ namespace DapperDemo.Data.Repository
             parameters.Add("@State", company.State);
             parameters.Add("@PostalCode", company.PostalCode);
 
-            db.Execute("usp_AddCompany", parameters, commandType: CommandType.StoredProcedure);
+            await db.ExecuteAsync("usp_AddCompany", parameters, commandType: CommandType.StoredProcedure);
 
             company.CompanyId = parameters.Get<int>("CompanyId");
 

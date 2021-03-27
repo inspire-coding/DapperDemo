@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DapperDemo.Data.Repository
 {
@@ -20,9 +21,9 @@ namespace DapperDemo.Data.Repository
 
 
 
-        public Company Add(Company company)
+        public async Task<Company> Add(Company company)
         {
-            var id = db.Insert(company);
+            var id = await db.InsertAsync(company);
             company.CompanyId = (int)id;
 
             return company;

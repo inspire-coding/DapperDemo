@@ -4,14 +4,14 @@ using System;
 using System.ComponentModel;
 using System.Windows.Input;
 
-namespace DapperDemo.WPF.Commands.Company
+namespace DapperDemo.WPF.Commands.CompanyCommands
 {
     public class BackToListCommand : ICommand
     {
-        public readonly CreateCompanyViewModel _companyViewModel;
+        public readonly UpsertCompanyViewModel _companyViewModel;
         private readonly IRenavigator _renavigator;
 
-        public BackToListCommand(CreateCompanyViewModel createCompanyViewModel, IRenavigator renavigator)
+        public BackToListCommand(UpsertCompanyViewModel createCompanyViewModel, IRenavigator renavigator)
         {
             _companyViewModel = createCompanyViewModel;
             _renavigator = renavigator;

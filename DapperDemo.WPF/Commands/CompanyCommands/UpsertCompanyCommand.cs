@@ -6,12 +6,12 @@ using System.Windows.Input;
 
 namespace DapperDemo.WPF.Commands.Company
 {
-    public class AddCompanyCommand : ICommand
+    public class UpsertCompanyCommand : ICommand
     {
         public readonly CompanyViewModel _companyViewModel;
         private readonly IRenavigator _renavigator;
 
-        public AddCompanyCommand(CompanyViewModel companyViewModel, IRenavigator renavigator)
+        public UpsertCompanyCommand(CompanyViewModel companyViewModel, IRenavigator renavigator)
         {
             _companyViewModel = companyViewModel;
             _renavigator = renavigator;

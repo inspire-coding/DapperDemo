@@ -8,16 +8,16 @@ namespace DapperDemo.WPF.ViewModels.Factories
     {
         private readonly CreateViewModel<HomeViewModel> _createHomeViewModel;
         private readonly CreateViewModel<CompanyViewModel> _createCompanyViewModel;
-        private readonly CreateViewModel<CreateCompanyViewModel> _createCreateCompanyViewModel;
+        private readonly CreateViewModel<UpsertCompanyViewModel> _createCreateCompanyViewModel;
 
-        public ViewModelFactory(CreateViewModel<HomeViewModel> createHomeViewModel, CreateViewModel<CompanyViewModel> createCompanyViewModel, CreateViewModel<CreateCompanyViewModel> createCreateCompanyViewModel)
+        public ViewModelFactory(CreateViewModel<HomeViewModel> createHomeViewModel, CreateViewModel<CompanyViewModel> createCompanyViewModel, CreateViewModel<UpsertCompanyViewModel> createCreateCompanyViewModel)
         {
             _createHomeViewModel = createHomeViewModel;
             _createCompanyViewModel = createCompanyViewModel;
             _createCreateCompanyViewModel = createCreateCompanyViewModel;
         }
 
-        public ViewModelBase CreateViewModel(ViewType viewType)
+        public ViewModelBase CreateViewModel(ViewType viewType, object dataToBePassed = null)
         {
             return viewType switch
             {

@@ -21,7 +21,7 @@
                 HorizontalAlignment="Left" 
                 Foreground="White"
                 FontSize="12"
-                Command="{Binding AddCompanyCommand}"
+                Command="{Binding UpsertCompanyCommand}"
                 Margin="0 20 0 20" >
             <Button.Style>
                 <Style TargetType="Button" >
@@ -47,7 +47,8 @@
 
 
         <ListView Grid.Row="2" BorderThickness="0" 
-                  ItemsSource="{Binding Companies}">
+                  ItemsSource="{Binding Companies}"
+                  SelectedItem="{Binding SelectedCompany}" >
             <ListView.View>
                 <GridView>
                     <GridView.ColumnHeaderContainerStyle>

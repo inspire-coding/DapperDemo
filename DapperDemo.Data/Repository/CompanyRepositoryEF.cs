@@ -2,6 +2,7 @@
 using DapperDemo.Data.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DapperDemo.Data.Repository
 {
@@ -17,10 +18,10 @@ namespace DapperDemo.Data.Repository
 
 
 
-        public Company Add(Company company)
+        public async Task<Company> Add(Company company)
         {
-            _db.Add(company);
-            _db.SaveChanges();
+            await _db.AddAsync(company);
+            await _db.SaveChangesAsync();
             return company;
         }
 

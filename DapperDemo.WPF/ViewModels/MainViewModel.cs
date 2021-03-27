@@ -1,5 +1,4 @@
-﻿using DapperDemo.Data.Repository;
-using DapperDemo.WPF.Commands;
+﻿using DapperDemo.WPF.Commands;
 using DapperDemo.WPF.State.Navigators;
 using DapperDemo.WPF.ViewModels.Factories;
 using System.Windows.Input;
@@ -16,6 +15,7 @@ namespace DapperDemo.WPF.ViewModels
 
 
         public ICommand UpdateCurrentViewModelCommand { get; }
+
 
 
         public MainViewModel(INavigator navigator, IViewModelFactory viewModelFactory)

@@ -1,6 +1,7 @@
 ﻿using DapperDemo.Data.Models;
 using DapperDemo.Data.Repository;
 using DapperDemo.WPF.Commands.Company;
+using DapperDemo.WPF.Commands.CompanyCommands;
 using DapperDemo.WPF.State.Navigators;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,7 +17,28 @@ namespace DapperDemo.WPF.ViewModels.CompanyVM
         public IEnumerable<Company> Companies => _companies;
 
 
-        public ICommand AddCompanyCommand { get; }
+        /*
+         * Properties
+         */
+        private Company _selectedCompany;
+
+        public Company SelectedCompany
+        {
+            get { return _selectedCompany; }
+            set 
+            { 
+                _selectedCompany = value; 
+            }
+        }
+
+
+
+
+
+        /*
+         * Commands
+         */
+        public ICommand UpsertCompanyCommand { get; }
 
 
 
@@ -29,7 +51,7 @@ namespace DapperDemo.WPF.ViewModels.CompanyVM
 
             GetCompanies();
 
-            AddCompanyCommand = new AddCompanyCommand(this, navigateToAddView);
+            UpsertCompanyCommand = new UpsertCompanyCommand(this, navigateToAddView);
         }
 
         private void GetCompanies()
