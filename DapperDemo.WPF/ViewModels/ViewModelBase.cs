@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
+﻿using System.ComponentModel;
 
 namespace DapperDemo.WPF.ViewModels
 {
@@ -13,6 +10,7 @@ namespace DapperDemo.WPF.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public object Data = null;
 
         protected void OnPorpertyChanged(string propertyName)
         {

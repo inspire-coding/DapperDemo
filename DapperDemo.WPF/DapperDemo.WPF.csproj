@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <None Remove="appsettings.json" />
+    <None Remove="Images\cancel.png" />
+    <None Remove="Images\cancel_darkred.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +33,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DapperDemo.Data\DapperDemo.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\cancel.png" />
+    <Resource Include="Images\cancel_darkred.png" />
   </ItemGroup>
 
 </Project>

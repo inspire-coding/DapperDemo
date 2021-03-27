@@ -2,6 +2,7 @@
 using DapperDemo.Data.Repository;
 using DapperDemo.WPF.Commands.CompanyCommands;
 using DapperDemo.WPF.State.Navigators;
+using DapperDemo.WPF.Utils;
 using System.Windows.Input;
 
 namespace DapperDemo.WPF.ViewModels.CompanyVM
@@ -77,6 +78,41 @@ namespace DapperDemo.WPF.ViewModels.CompanyVM
             }
         }
 
+        private Company _selectedCompany;
+        public Company SelectedCompany
+        {
+            get { return _selectedCompany; }
+            set
+            {
+                _selectedCompany = value;
+                if(_selectedCompany != null) UpdateProperties(_selectedCompany);
+                OnPorpertyChanged(nameof(SelectedCompany));
+
+                if (_selectedCompany == null)
+                {
+                    _upsertAction = UpsertAction.Add;
+                }
+                else
+                {
+                    _upsertAction = UpsertAction.Update;
+                }
+                OnPorpertyChanged(nameof(UpsertAction));
+            }
+        }
+
+
+        private UpsertAction _upsertAction;
+        public UpsertAction UpsertAction
+        {
+            get { return _upsertAction; }
+            set 
+            { 
+                _upsertAction = value;
+                OnPorpertyChanged(nameof(UpsertAction));
+            }
+        }
+
+
         public Company Company => CompanyFactory();
         private Company CompanyFactory()
         {
@@ -100,17 +136,17 @@ namespace DapperDemo.WPF.ViewModels.CompanyVM
         public ICommand AddCompanyCommand { get; }
 
 
-        public UpsertCompanyViewModel(ICompanyRepository compRepo, IRenavigator navigateBackToCompanyView, object selectedCompany = null)
+        public UpsertCompanyViewModel(ICompanyRepository compRepo, IRenavigator navigateBackToCompanyView)
         {
             _compRepo = compRepo;
 
-            if (selectedCompany != null && selectedCompany is Company)
+            if (_selectedCompany != null && _selectedCompany is Company)
             {
-                UpdateProperties(selectedCompany as Company);
+                UpdateProperties(Data as Company);
             }
 
             BackToListCommand = new BackToListCommand(this, navigateBackToCompanyView);
-            AddCompanyCommand = new AddCompanyCommand(this, compRepo, navigateBackToCompanyView);
+            AddCompanyCommand = new UpsertCompanyCommand(this, compRepo, UpsertAction, navigateBackToCompanyView);
         }
 
         private void UpdateProperties(Company selectedCompany)

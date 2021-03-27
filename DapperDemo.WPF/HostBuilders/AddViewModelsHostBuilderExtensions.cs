@@ -37,8 +37,9 @@ namespace DapperDemo.WPF.HostBuilders
         private static CompanyViewModel CreateCompanyViewModel(IServiceProvider services)
         {
             return new CompanyViewModel(
+                services.GetRequiredService<UpsertCompanyViewModel>(),
                 services.GetRequiredService<ICompanyRepository>(), 
-                services.GetRequiredService<ViewModelDelegateRenavigator<UpsertCompanyViewModel>>());
+                services.GetRequiredService<INavigator>());
         }
 
         private static UpsertCompanyViewModel CreateCreateCompanyViewModel(IServiceProvider service)

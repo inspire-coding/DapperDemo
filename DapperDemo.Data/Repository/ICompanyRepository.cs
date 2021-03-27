@@ -10,7 +10,7 @@ namespace DapperDemo.Data.Repository
         List<Company> GetAll();
 
         Task<Company> Add(Company company);
-        Company Update(Company company);
+        Task<Company> Update(Company company);
         void Remove(int id);
     }
 }

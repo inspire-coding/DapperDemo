@@ -54,7 +54,7 @@ namespace DapperDemo.Data.Repository
             db.Execute("usp_RemoveCompany", new { CompanyId = id }, commandType: CommandType.StoredProcedure);
         }
 
-        public Company Update(Company company)
+        public async Task<Company> Update(Company company)
         {
             var parameters = new DynamicParameters();
 
@@ -65,7 +65,7 @@ namespace DapperDemo.Data.Repository
             parameters.Add("@State", company.State);
             parameters.Add("@PostalCode", company.PostalCode);
 
-            db.Execute("usp_UpdateCompany", parameters, commandType: CommandType.StoredProcedure);
+            await db.ExecuteAsync("usp_UpdateCompany", parameters, commandType: CommandType.StoredProcedure);
 
             return company;
         }

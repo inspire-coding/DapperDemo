@@ -62,12 +62,12 @@ namespace DapperDemo.Data.Repository
             return;
         }
 
-        public Company Update(Company company)
+        public async Task<Company> Update(Company company)
         {
             var sql = "UPDATE Companies SET Name = @Name, Address = @Address, City = @City, State = @State, PostalCode = @PostalCode "
                 + "WHERE CompanyId = @CompanyId";
 
-            db.Execute(sql, company);
+            await db.ExecuteAsync(sql, company);
 
             return null;
         }

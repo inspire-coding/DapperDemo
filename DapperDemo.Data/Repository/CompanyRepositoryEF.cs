@@ -43,7 +43,7 @@ namespace DapperDemo.Data.Repository
             return;
         }
 
-        public Company Update(Company company)
+        public async Task<Company> Update(Company company)
         {
             _db.Companies.Update(company);
             _db.SaveChanges();

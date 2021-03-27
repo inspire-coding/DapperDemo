@@ -18,6 +18,25 @@ namespace DapperDemo.WPF.ViewModels
 
 
 
+
+        private ICommand _closeCommand;
+        public ICommand CloseComamnd
+        {
+            get
+            {
+                if (_closeCommand == null)
+                {
+                    _closeCommand = new RelayCommand(param => Close());
+                }
+                return _closeCommand;
+            }
+        }
+        public void Close()
+        {
+           App.Current.Shutdown();
+        }
+
+
         public MainViewModel(INavigator navigator, IViewModelFactory viewModelFactory)
         {
             _navigator = navigator;

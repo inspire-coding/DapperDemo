@@ -46,7 +46,7 @@
         </Button>
 
 
-        <ListView Grid.Row="2" BorderThickness="0" 
+        <ListView Grid.Row="2" BorderThickness="0" x:Name="Page"
                   ItemsSource="{Binding Companies}"
                   SelectedItem="{Binding SelectedCompany}" >
             <ListView.View>
@@ -76,6 +76,7 @@
                             <DataTemplate >
                                 <Button Content="Edit" 
                                         Foreground="White"
+                                        Command="{Binding DataContext.UpsertCompanyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}}"
                                         Margin="0 3 0 3">
                                     <Button.Style>
                                         <Style TargetType="Button" >

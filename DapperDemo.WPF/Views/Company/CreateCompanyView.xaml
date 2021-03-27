@@ -82,7 +82,7 @@
         </StackPanel>
 
         <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0 20 0 0">
-            <Button Content="Create"
+            <Button Content="{Binding UpsertAction, UpdateSourceTrigger=PropertyChanged}"
                     Foreground="White"
                     FontSize="12"
                     Command="{Binding AddCompanyCommand}"

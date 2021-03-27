@@ -44,9 +44,9 @@ namespace DapperDemo.Data.Repository
             db.Delete(new Company { CompanyId = id });
         }
 
-        public Company Update(Company company)
+        public async Task<Company> Update(Company company)
         {
-            var id = db.Update(company);
+            var id = await db.UpdateAsync(company);
 
             return company;
         }
