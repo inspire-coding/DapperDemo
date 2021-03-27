@@ -1,9 +1,7 @@
 ﻿using DapperDemo.WPF.State.Navigators;
 using DapperDemo.WPF.ViewModels.CompanyVM;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
 using System.Windows.Input;
 
 namespace DapperDemo.WPF.Commands.CompanyCommands
@@ -11,17 +9,17 @@ namespace DapperDemo.WPF.Commands.CompanyCommands
     public class NavigateToDetailsCompanyCommand : ICommand
     {
         public readonly CompanyViewModel _companyViewModel;
-        public readonly UpsertCompanyViewModel _upsertCompanyViewModel;
+        public readonly CompanyDetailsViewModel _companyDetailsViewModel;
         private readonly INavigator _navigator;
 
-        public NavigateToDetailsCompanyCommand(CompanyViewModel companyViewModel, UpsertCompanyViewModel upsertCompanyViewModel, INavigator navigator)
+        public NavigateToDetailsCompanyCommand(CompanyViewModel companyViewModel, CompanyDetailsViewModel companyDetailsViewModel, INavigator navigator)
         {
             _companyViewModel = companyViewModel;
-            _upsertCompanyViewModel = upsertCompanyViewModel;
+            _companyDetailsViewModel = companyDetailsViewModel;
             _navigator = navigator;
 
             companyViewModel.PropertyChanged += CompanyViewModel_PropertyChanged;
-            upsertCompanyViewModel.PropertyChanged += CompanyViewModel_PropertyChanged;
+            _companyDetailsViewModel.PropertyChanged += CompanyViewModel_PropertyChanged;
         }
 
         public event EventHandler CanExecuteChanged;
@@ -33,8 +31,8 @@ namespace DapperDemo.WPF.Commands.CompanyCommands
 
         public void Execute(object parameter)
         {
-            _upsertCompanyViewModel.SelectedCompany = _companyViewModel.SelectedCompany;
-            _navigator.CurrentViewModel = _upsertCompanyViewModel;
+            _companyDetailsViewModel.SelectedCompanyId = _companyViewModel.SelectedCompany.CompanyId;
+            _navigator.CurrentViewModel = _companyDetailsViewModel;
         }
 
         private void CompanyViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)

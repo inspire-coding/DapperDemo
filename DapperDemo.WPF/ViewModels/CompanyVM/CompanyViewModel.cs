@@ -43,12 +43,13 @@ namespace DapperDemo.WPF.ViewModels.CompanyVM
          */
         public ICommand NavigateToAddCompanyCommand { get; }
         public ICommand NavigateToUpsertCompanyCommand { get; }
+        public ICommand NavigateToDetailsCompanyCommand { get; }
 
 
 
 
 
-        public CompanyViewModel(UpsertCompanyViewModel upsertCompanyViewModel, ICompanyRepository compRepo, INavigator navigator)
+        public CompanyViewModel(UpsertCompanyViewModel upsertCompanyViewModel, CompanyDetailsViewModel companyDetailsViewModel, ICompanyRepository compRepo, INavigator navigator)
         {
             _compRepo = compRepo;
             _companies = new ObservableCollection<Company>();
@@ -57,6 +58,7 @@ namespace DapperDemo.WPF.ViewModels.CompanyVM
 
             NavigateToAddCompanyCommand = new NavigateToAddCompanyCommand(this, upsertCompanyViewModel, navigator);
             NavigateToUpsertCompanyCommand = new NavigateToUpsertCompanyCommand(this, upsertCompanyViewModel, navigator);
+            NavigateToDetailsCompanyCommand = new NavigateToDetailsCompanyCommand(this, companyDetailsViewModel, navigator);
         }
 
         private void GetCompanies()

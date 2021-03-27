@@ -19,16 +19,19 @@ namespace DapperDemo.WPF.HostBuilders
                 services.AddTransient<MainViewModel>();
                 services.AddTransient<HomeViewModel>();
                 services.AddTransient<CompanyViewModel>();
-                services.AddTransient(CreateCreateCompanyViewModel);
+                services.AddTransient(CreateUpsertCompanyViewModel);
+                services.AddTransient(CreateCompanyDetailsViewModel);
 
                 services.AddSingleton<CreateViewModel<HomeViewModel>>(services => () => services.GetRequiredService<HomeViewModel>());
                 services.AddSingleton<CreateViewModel<CompanyViewModel>>(services => () => CreateCompanyViewModel(services));
-                services.AddSingleton<CreateViewModel<UpsertCompanyViewModel>>(services => () => CreateCreateCompanyViewModel(services));
+                services.AddSingleton<CreateViewModel<UpsertCompanyViewModel>>(services => () => CreateUpsertCompanyViewModel(services));
+                services.AddSingleton<CreateViewModel<CompanyDetailsViewModel>>(services => () => CreateCompanyDetailsViewModel(services));
 
                 services.AddSingleton<IViewModelFactory, ViewModelFactory>();
 
                 services.AddSingleton<ViewModelDelegateRenavigator<CompanyViewModel>>();
                 services.AddSingleton<ViewModelDelegateRenavigator<UpsertCompanyViewModel>>();
+                services.AddSingleton<ViewModelDelegateRenavigator<CompanyDetailsViewModel>>();
             });
 
             return host;
@@ -38,15 +41,23 @@ namespace DapperDemo.WPF.HostBuilders
         {
             return new CompanyViewModel(
                 services.GetRequiredService<UpsertCompanyViewModel>(),
+                services.GetRequiredService<CompanyDetailsViewModel>(),
                 services.GetRequiredService<ICompanyRepository>(), 
                 services.GetRequiredService<INavigator>());
         }
 
-        private static UpsertCompanyViewModel CreateCreateCompanyViewModel(IServiceProvider service)
+        private static UpsertCompanyViewModel CreateUpsertCompanyViewModel(IServiceProvider services)
         {
             return new UpsertCompanyViewModel(
-                service.GetRequiredService<ICompanyRepository>(),
-                service.GetRequiredService<ViewModelDelegateRenavigator<CompanyViewModel>>());
+                services.GetRequiredService<ICompanyRepository>(),
+                services.GetRequiredService<ViewModelDelegateRenavigator<CompanyViewModel>>());
+        }
+
+        private static CompanyDetailsViewModel CreateCompanyDetailsViewModel(IServiceProvider services)
+        {
+            return new CompanyDetailsViewModel(
+                services.GetRequiredService<ViewModelDelegateRenavigator<CompanyViewModel>>(),
+                services.GetRequiredService<IBonusRepository>());
         }
     }
 }

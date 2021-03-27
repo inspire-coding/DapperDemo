@@ -132,7 +132,7 @@ namespace DapperDemo.WPF.ViewModels.CompanyVM
             && !string.IsNullOrEmpty(State)
             && !string.IsNullOrEmpty(PostalCode);
 
-        public ICommand BackToListCommand { get; }
+        public ICommand BackToCompanyListCommand { get; }
         public ICommand UpsertCompanyCommand { get; }
 
 
@@ -140,7 +140,7 @@ namespace DapperDemo.WPF.ViewModels.CompanyVM
         {
             _compRepo = compRepo;
 
-            BackToListCommand = new BackToListCommand(this, navigateBackToCompanyView);
+            BackToCompanyListCommand = new BackToCompanyListCommand(this, navigateBackToCompanyView);
             UpsertCompanyCommand = new UpsertCompanyCommand(this, compRepo, UpsertAction, navigateBackToCompanyView);
         }
 

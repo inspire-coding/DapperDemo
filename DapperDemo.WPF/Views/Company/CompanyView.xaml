@@ -90,7 +90,7 @@
             <!--Details of selected Company-->
             <Button Content="Details" 
                     Foreground="White"
-                    Command="{Binding NavigateToUpsertCompanyCommand}"
+                    Command="{Binding NavigateToDetailsCompanyCommand}"
                     Margin="10 20 0 20">
                 <Button.Style>
                     <Style TargetType="Button" >
