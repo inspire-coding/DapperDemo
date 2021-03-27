@@ -1,18 +1,20 @@
 ﻿using DapperDemo.WPF.State.Navigators;
 using DapperDemo.WPF.ViewModels.CompanyVM;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Text;
 using System.Windows.Input;
 
-namespace DapperDemo.WPF.Commands.Company
+namespace DapperDemo.WPF.Commands.CompanyCommands
 {
-    public class NavigateToUpsertCompanyCommand : ICommand
+    public class NavigateToAddCompanyCommand : ICommand
     {
         public readonly CompanyViewModel _companyViewModel;
         public readonly UpsertCompanyViewModel _upsertCompanyViewModel;
         private readonly INavigator _navigator;
 
-        public NavigateToUpsertCompanyCommand(CompanyViewModel companyViewModel, UpsertCompanyViewModel upsertCompanyViewModel, INavigator navigator)
+        public NavigateToAddCompanyCommand(CompanyViewModel companyViewModel, UpsertCompanyViewModel upsertCompanyViewModel, INavigator navigator)
         {
             _companyViewModel = companyViewModel;
             _upsertCompanyViewModel = upsertCompanyViewModel;
@@ -26,12 +28,11 @@ namespace DapperDemo.WPF.Commands.Company
 
         public bool CanExecute(object parameter)
         {
-            return _companyViewModel.IsItemSelected;
+            return true;
         }
 
         public void Execute(object parameter)
         {
-            _upsertCompanyViewModel.SelectedCompany = _companyViewModel.SelectedCompany;
             _navigator.CurrentViewModel = _upsertCompanyViewModel;
         }
 

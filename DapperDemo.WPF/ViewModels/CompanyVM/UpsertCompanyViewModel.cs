@@ -133,20 +133,15 @@ namespace DapperDemo.WPF.ViewModels.CompanyVM
             && !string.IsNullOrEmpty(PostalCode);
 
         public ICommand BackToListCommand { get; }
-        public ICommand AddCompanyCommand { get; }
+        public ICommand UpsertCompanyCommand { get; }
 
 
         public UpsertCompanyViewModel(ICompanyRepository compRepo, IRenavigator navigateBackToCompanyView)
         {
             _compRepo = compRepo;
 
-            if (_selectedCompany != null && _selectedCompany is Company)
-            {
-                UpdateProperties(Data as Company);
-            }
-
             BackToListCommand = new BackToListCommand(this, navigateBackToCompanyView);
-            AddCompanyCommand = new UpsertCompanyCommand(this, compRepo, UpsertAction, navigateBackToCompanyView);
+            UpsertCompanyCommand = new UpsertCompanyCommand(this, compRepo, UpsertAction, navigateBackToCompanyView);
         }
 
         private void UpdateProperties(Company selectedCompany)

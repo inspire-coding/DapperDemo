@@ -8,20 +8,26 @@
              mc:Ignorable="d" 
              Background="White"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid MaxWidth="1600" Margin="5 0 0 0">
+    <Grid MaxWidth="1600" Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="Company Management" FontSize="36" FontWeight="Bold" />
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Company Management" FontSize="36" FontWeight="Bold" />
 
-        <Button Content="Add Company" Grid.Row="1" 
+
+        <!--Add Company-->
+        <Button Content="Add Company" Grid.Row="1" Grid.Column="0"
                 HorizontalAlignment="Left" 
                 Foreground="White"
                 FontSize="12"
-                Command="{Binding UpsertCompanyCommand}"
+                Command="{Binding NavigateToAddCompanyCommand}"
                 Margin="0 20 0 20" >
             <Button.Style>
                 <Style TargetType="Button" >
@@ -45,8 +51,130 @@
             </Button.Template>
         </Button>
 
+        <StackPanel 
+            Orientation="Horizontal" 
+            Grid.Row="1" Grid.Column="2"
+            HorizontalAlignment="Right">
+            <!--Edit Company-->
+            <Button Content="Edit" 
+                    Foreground="White"
+                    FontSize="12"
+                    Command="{Binding NavigateToUpsertCompanyCommand}"
+                    Margin="0 20 0 20">
+                <Button.Style>
+                    <Style TargetType="Button" >
+                        <Setter Property="Background" Value="#17a3b8" />
+                        <Setter Property="Cursor" Value="Hand" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#158c9e" />
+                                <Setter Property="Cursor" Value="Hand" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="LightGray" />
+                                <Setter Property="Foreground" Value="Gray" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="70" Height="35"
+                                CornerRadius="4"
+                                Background="{TemplateBinding Background}" >
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <!--Details of selected Company-->
+            <Button Content="Details" 
+                    Foreground="White"
+                    Command="{Binding NavigateToUpsertCompanyCommand}"
+                    Margin="10 20 0 20">
+                <Button.Style>
+                    <Style TargetType="Button" >
+                        <Setter Property="Background" Value="#28a746" />
+                        <Setter Property="Cursor" Value="Hand" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#218a3a" />
+                                <Setter Property="Cursor" Value="Hand" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="LightGray" />
+                                <Setter Property="Foreground" Value="Gray" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="70" Height="35"
+                                                        CornerRadius="4"
+                                                        Background="{TemplateBinding Background}" >
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <!--Delete Company-->
+            <Button Content="Delete" 
+                    Foreground="White"
+                    Margin="10 20 0 20">
+                <Button.Style>
+                    <Style TargetType="Button" >
+                        <Setter Property="Background" Value="#dc3546" />
+                        <Setter Property="Cursor" Value="Hand" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#b52b39" />
+                                <Setter Property="Cursor" Value="Hand" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="70" Height="35"
+                                CornerRadius="4"
+                                Background="{TemplateBinding Background}" >
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <!--Manage Employees-->
+            <Button Content="Manage Employees" 
+                    Foreground="White"
+                    Margin="50 20 0 20">
+                <Button.Style>
+                    <Style TargetType="Button" >
+                        <Setter Property="Background" Value="#1b6fc2" />
+                        <Setter Property="Cursor" Value="Hand" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#1661ab" />
+                                <Setter Property="Cursor" Value="Hand" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="120" Height="35"
+                                                    CornerRadius="4"
+                                                    Background="{TemplateBinding Background}" >
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </StackPanel>
 
-        <ListView Grid.Row="2" BorderThickness="0" x:Name="Page"
+
+
+        <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="0" x:Name="Page"
                   ItemsSource="{Binding Companies}"
                   SelectedItem="{Binding SelectedCompany}" >
             <ListView.View>
@@ -71,134 +199,6 @@
                     <GridViewColumn Header="City" DisplayMemberBinding="{Binding City}" />
                     <GridViewColumn Header="State" DisplayMemberBinding="{Binding State}" />
                     <GridViewColumn Header="PostalCode" DisplayMemberBinding="{Binding PostalCode}" />
-                    <GridViewColumn >
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate >
-                                <Button Content="Edit" 
-                                        Foreground="White"
-                                        Command="{Binding DataContext.UpsertCompanyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}}"
-                                        Margin="0 3 0 3">
-                                    <Button.Style>
-                                        <Style TargetType="Button" >
-                                            <Setter Property="Background" Value="#17a3b8" />
-                                            <Setter Property="Cursor" Value="Hand" />
-                                            <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Background" Value="#158c9e" />
-                                                    <Setter Property="Cursor" Value="Hand" />
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Button.Style>
-                                    <Button.Template>
-                                        <ControlTemplate TargetType="Button">
-                                            <Border Width="80" Height="20"
-                                                    CornerRadius="4"
-                                                    Background="{TemplateBinding Background}" >
-                                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Button.Template>
-                                </Button>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-
-                    <GridViewColumn >
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate >
-                                <Button Content="Details" 
-                                        Foreground="White"
-                                        Margin="0 3 0 3">
-                                    <Button.Style>
-                                        <Style TargetType="Button" >
-                                            <Setter Property="Background" Value="#28a746" />
-                                            <Setter Property="Cursor" Value="Hand" />
-                                            <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Background" Value="#218a3a" />
-                                                    <Setter Property="Cursor" Value="Hand" />
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Button.Style>
-                                    <Button.Template>
-                                        <ControlTemplate TargetType="Button">
-                                            <Border Width="80" Height="20"
-                                                    CornerRadius="4"
-                                                    Background="{TemplateBinding Background}" >
-                                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Button.Template>
-                                </Button>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-
-                    <GridViewColumn >
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate >
-                                <Button Content="Delete" 
-                                        Foreground="White"
-                                        Margin="0 3 0 3">
-                                    <Button.Style>
-                                        <Style TargetType="Button" >
-                                            <Setter Property="Background" Value="#dc3546" />
-                                            <Setter Property="Cursor" Value="Hand" />
-                                            <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Background" Value="#b52b39" />
-                                                    <Setter Property="Cursor" Value="Hand" />
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Button.Style>
-                                    <Button.Template>
-                                        <ControlTemplate TargetType="Button">
-                                            <Border Width="80" Height="20"
-                                                    CornerRadius="4"
-                                                    Background="{TemplateBinding Background}" >
-                                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Button.Template>
-                                </Button>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-
-                    <GridViewColumn >
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate >
-                                <Button Content="Manage Employees" 
-                                        Foreground="White"
-                                        Margin="20 3 0 3">
-                                    <Button.Style>
-                                        <Style TargetType="Button" >
-                                            <Setter Property="Background" Value="#1b6fc2" />
-                                            <Setter Property="Cursor" Value="Hand" />
-                                            <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Background" Value="#1661ab" />
-                                                    <Setter Property="Cursor" Value="Hand" />
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Button.Style>
-                                    <Button.Template>
-                                        <ControlTemplate TargetType="Button">
-                                            <Border Width="120" Height="20"
-                                                    CornerRadius="4"
-                                                    Background="{TemplateBinding Background}" >
-                                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Button.Template>
-                                </Button>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
 
                 </GridView>
             </ListView.View>

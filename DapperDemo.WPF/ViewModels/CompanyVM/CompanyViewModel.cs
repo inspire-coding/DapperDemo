@@ -20,7 +20,7 @@ namespace DapperDemo.WPF.ViewModels.CompanyVM
         /*
          * Properties
          */
-        private Company _selectedCompany;
+        private Company _selectedCompany = new Company();
 
         public Company SelectedCompany
         {
@@ -28,10 +28,12 @@ namespace DapperDemo.WPF.ViewModels.CompanyVM
             set 
             { 
                 _selectedCompany = value;
-                Data = value;
+                OnPorpertyChanged(nameof(SelectedCompany));
+                OnPorpertyChanged(nameof(IsItemSelected));
             }
         }
 
+        public bool IsItemSelected => !string.IsNullOrEmpty(SelectedCompany.Name);
 
 
 
@@ -39,7 +41,8 @@ namespace DapperDemo.WPF.ViewModels.CompanyVM
         /*
          * Commands
          */
-        public ICommand UpsertCompanyCommand { get; }
+        public ICommand NavigateToAddCompanyCommand { get; }
+        public ICommand NavigateToUpsertCompanyCommand { get; }
 
 
 
@@ -52,7 +55,8 @@ namespace DapperDemo.WPF.ViewModels.CompanyVM
 
             GetCompanies();
 
-            UpsertCompanyCommand = new NavigateToUpsertCompanyCommand(this, upsertCompanyViewModel, navigator);
+            NavigateToAddCompanyCommand = new NavigateToAddCompanyCommand(this, upsertCompanyViewModel, navigator);
+            NavigateToUpsertCompanyCommand = new NavigateToUpsertCompanyCommand(this, upsertCompanyViewModel, navigator);
         }
 
         private void GetCompanies()

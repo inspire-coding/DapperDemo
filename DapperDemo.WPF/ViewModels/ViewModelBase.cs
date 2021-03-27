@@ -10,8 +10,6 @@ namespace DapperDemo.WPF.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public object Data = null;
-
         protected void OnPorpertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
