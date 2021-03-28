@@ -90,13 +90,16 @@ namespace DapperDemo.WPF.ViewModels.CompanyVM
 
                 if (_selectedCompany == null)
                 {
-                    _upsertAction = UpsertAction.Add;
+                    UpsertAction = UpsertAction.Add;
+                    UpsertActionTitle = UpsertAction.Add.ToString();
                 }
                 else
                 {
-                    _upsertAction = UpsertAction.Update;
+                    UpsertAction = UpsertAction.Update;
+                    UpsertActionTitle = UpsertAction.Update.ToString();
                 }
                 OnPorpertyChanged(nameof(UpsertAction));
+                OnPorpertyChanged(nameof(UpsertActionTitle));
             }
         }
 
@@ -109,6 +112,16 @@ namespace DapperDemo.WPF.ViewModels.CompanyVM
             { 
                 _upsertAction = value;
                 OnPorpertyChanged(nameof(UpsertAction));
+            }
+        }
+        private string _upsertActionTitle;
+        public string UpsertActionTitle
+        {
+            get { return _upsertActionTitle + " Company"; }
+            set 
+            {
+                _upsertActionTitle = value;
+                OnPorpertyChanged(nameof(UpsertActionTitle));
             }
         }
 
@@ -142,6 +155,8 @@ namespace DapperDemo.WPF.ViewModels.CompanyVM
 
             BackToCompanyListCommand = new BackToCompanyListCommand(this, navigateBackToCompanyView);
             UpsertCompanyCommand = new UpsertCompanyCommand(this, compRepo, UpsertAction, navigateBackToCompanyView);
+
+            UpsertActionTitle = UpsertAction.Add.ToString();
         }
 
         private void UpdateProperties(Company selectedCompany)

@@ -19,7 +19,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="Create Company" FontSize="36" FontWeight="Bold" />
+        <TextBlock Grid.Row="0" Text="{Binding UpsertActionTitle, UpdateSourceTrigger=PropertyChanged}" FontSize="36" FontWeight="Bold" />
 
         <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Left" Margin="0 20 0 0 ">
             <TextBlock Text="Name" FontSize="12" Foreground="Gray" />
