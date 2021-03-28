@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Transactions;
 
 namespace DapperDemo.Data.Repository
@@ -122,7 +123,7 @@ namespace DapperDemo.Data.Repository
             return company;
         }
 
-        public List<Employee> GetEmployeeWithCompany(int companyId)
+        public async Task<List<Employee>> GetEmployeeWithCompany(int companyId)
         {
             var sql = "SELECT E.*, C.* FROM Employees AS E INNER JOIN Companies AS C ON E.CompanyId = C.CompanyId";
 
@@ -131,7 +132,7 @@ namespace DapperDemo.Data.Repository
                 sql += " WHERE E.CompanyId = @CompanyId ";
             }
 
-            var employee = db.Query<Employee, Company, Employee>(sql, (e, c) =>
+            var employee = await db.QueryAsync<Employee, Company, Employee>(sql, (e, c) =>
             {
                 e.Company = c;
                 return e;

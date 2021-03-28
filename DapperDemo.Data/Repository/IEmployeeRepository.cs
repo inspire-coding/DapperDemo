@@ -7,11 +7,11 @@ namespace DapperDemo.Data.Repository
     public interface IEmployeeRepository
     {
         Employee Find(int id);
-        List<Employee> GetAll();
+        Task<List<Employee>> GetAll();
 
         Employee Add(Employee employee);
         Task<Employee> AddAsync(Employee employee);
         Employee Update(Employee employee);
-        void Remove(int id);
+        Task Remove(int id);
     }
 }

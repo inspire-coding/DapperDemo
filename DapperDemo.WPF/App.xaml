@@ -4,8 +4,10 @@
              xmlns:local="clr-namespace:DapperDemo.WPF"
              xmlns:viewmodels="clr-namespace:DapperDemo.WPF.ViewModels"
              xmlns:viewmodelsCompany="clr-namespace:DapperDemo.WPF.ViewModels.CompanyVM"
+             xmlns:viewmodelsEmployee="clr-namespace:DapperDemo.WPF.ViewModels.EmployeeVM"
              xmlns:views="clr-namespace:DapperDemo.WPF.Views"
              xmlns:viewCompany="clr-namespace:DapperDemo.WPF.Views.Company"
+             xmlns:viewEmployee="clr-namespace:DapperDemo.WPF.Views.Employee"
              >
     <Application.Resources>
 
@@ -21,6 +23,11 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewmodelsCompany:CompanyDetailsViewModel}">
             <viewCompany:CompanyDetails />
+        </DataTemplate>
+        
+        
+        <DataTemplate DataType="{x:Type viewmodelsEmployee:EmployeesViewModel}">
+            <viewEmployee:EmployeesView />
         </DataTemplate>
 
     </Application.Resources>

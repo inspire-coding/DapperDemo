@@ -50,17 +50,18 @@ namespace DapperDemo.Data.Repository
             return db.Query<Employee>(sql, new { @Id = id }).Single();
         }
 
-        public List<Employee> GetAll()
+        public async Task<List<Employee>> GetAll()
         {
             var sql = "select * from Employees";
-            return db.Query<Employee>(sql).ToList();
+            var result = await db.QueryAsync<Employee>(sql);
+            return result.ToList();
         }
 
-        public void Remove(int id)
+        public async Task Remove(int id)
         {
             var sql = "DELETE  FROM Employees WHERE EmployeeId = @Id";
 
-            db.Execute(sql, new { id });
+            await db.ExecuteAsync(sql, new { id });
 
             return;
         }

@@ -127,7 +127,9 @@
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    FontWeight="Medium"
-                   FontSize="12"  >
+                   FontSize="12" 
+                   Command="{Binding UpdateCurrentViewModelCommand}"
+                   CommandParameter="{x:Static nav:ViewType.Employees}" > 
                     <Button.Style>
                         <Style TargetType="Button" >
                             <Setter Property="Background" Value="White" />

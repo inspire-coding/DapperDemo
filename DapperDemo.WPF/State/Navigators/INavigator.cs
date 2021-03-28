@@ -9,7 +9,9 @@ namespace DapperDemo.WPF.State.Navigators
     {
         Home,
         Company,
-        CreateCompany
+        CreateCompany,
+        Employees,
+        CreateEmployee
     }
 
     public interface INavigator

@@ -1,11 +1,12 @@
 ﻿using DapperDemo.Data.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DapperDemo.Data.Repository
 {
     public interface IBonusRepository
     {
-        List<Employee> GetEmployeeWithCompany(int companyId);
+        Task<List<Employee>> GetEmployeeWithCompany(int companyId);
 
         Company GetCompanyWithEmployees(int id);
 

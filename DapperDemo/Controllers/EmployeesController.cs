@@ -33,7 +33,7 @@ namespace DapperDemo.Controllers
             //    obj.Company = _compRepo.Find(obj.CompanyId);
             //}
 
-            List<Employee> employees = _bonRepo.GetEmployeeWithCompany(companyId);
+            List<Employee> employees = await _bonRepo.GetEmployeeWithCompany(companyId);
 
             return View(employees);
         }
