@@ -35,7 +35,7 @@ namespace DapperDemo.Data.Repository
             return _db.Companies.ToList();
         }
 
-        public void Remove(int id)
+        public async Task Remove(int id)
         {
             Company company = _db.Companies.FirstOrDefault(u => u.CompanyId == id);
             _db.Companies.Remove(company);

@@ -181,13 +181,8 @@
                         </Image.Style>
                     </Image>
                 </Button>
-
-
-
+                
             </Grid>
-
         </Grid>
-
     </Border>
-
 </UserControl>

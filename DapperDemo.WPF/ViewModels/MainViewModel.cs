@@ -31,6 +31,8 @@ namespace DapperDemo.WPF.ViewModels
                 return _closeCommand;
             }
         }
+
+
         public void Close()
         {
            App.Current.Shutdown();

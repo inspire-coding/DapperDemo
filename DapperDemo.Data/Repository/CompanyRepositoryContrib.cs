@@ -39,9 +39,9 @@ namespace DapperDemo.Data.Repository
             return db.GetAll<Company>().ToList();
         }
 
-        public void Remove(int id)
+        public async Task Remove(int id)
         {
-            db.Delete(new Company { CompanyId = id });
+            await db.DeleteAsync(new Company { CompanyId = id });
         }
 
         public async Task<Company> Update(Company company)

@@ -1,8 +1,11 @@
 ﻿using DapperDemo.Data.Repository;
 using DapperDemo.WPF.State.Navigators;
+using DapperDemo.WPF.Utils.DialogHelper;
 using DapperDemo.WPF.ViewModels;
 using DapperDemo.WPF.ViewModels.CompanyVM;
+using DapperDemo.WPF.ViewModels.Dialog;
 using DapperDemo.WPF.ViewModels.Factories;
+using DapperDemo.WPF.Views.Dialog;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -39,11 +42,16 @@ namespace DapperDemo.WPF.HostBuilders
 
         private static CompanyViewModel CreateCompanyViewModel(IServiceProvider services)
         {
+            IDialogService dialogService = new DialogService(services.GetRequiredService<MainWindow>());
+            dialogService.Register<YesCancelDialogViewModel, YesCancelDialog>();
+
             return new CompanyViewModel(
                 services.GetRequiredService<UpsertCompanyViewModel>(),
                 services.GetRequiredService<CompanyDetailsViewModel>(),
                 services.GetRequiredService<ICompanyRepository>(), 
-                services.GetRequiredService<INavigator>());
+                services.GetRequiredService<INavigator>(),
+                dialogService
+                );
         }
 
         private static UpsertCompanyViewModel CreateUpsertCompanyViewModel(IServiceProvider services)

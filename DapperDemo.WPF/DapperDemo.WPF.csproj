@@ -10,6 +10,7 @@
     <None Remove="appsettings.json" />
     <None Remove="Images\cancel.png" />
     <None Remove="Images\cancel_darkred.png" />
+    <None Remove="Images\warning.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +39,7 @@
   <ItemGroup>
     <Resource Include="Images\cancel.png" />
     <Resource Include="Images\cancel_darkred.png" />
+    <Resource Include="Images\warning.png" />
   </ItemGroup>
 
 </Project>

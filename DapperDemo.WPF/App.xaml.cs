@@ -40,6 +40,7 @@ namespace DapperDemo.WPF
             return Host.CreateDefaultBuilder(args)
                 .AddDbContext()
                 .AddRepositories()
+                .AddServices()
                 .AddStores()
                 .AddViewModels()
                 .AddViews();

@@ -53,11 +53,11 @@ namespace DapperDemo.Data.Repository
             return db.Query<Company>(sql).ToList();
         }
 
-        public void Remove(int id)
+        public async Task Remove(int id)
         {
             var sql = "DELETE  FROM Companies WHERE CompanyId = @Id";
 
-            db.Execute(sql, new { id });
+            await db.ExecuteAsync(sql, new { id });
 
             return;
         }

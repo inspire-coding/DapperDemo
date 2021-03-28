@@ -111,8 +111,8 @@
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Border Width="70" Height="35"
-                                                        CornerRadius="4"
-                                                        Background="{TemplateBinding Background}" >
+                                CornerRadius="4"
+                                Background="{TemplateBinding Background}" >
                             <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
                         </Border>
                     </ControlTemplate>
@@ -121,6 +121,7 @@
             <!--Delete Company-->
             <Button Content="Delete" 
                     Foreground="White"
+                    Command="{Binding DeleteCompanyCommand}"
                     Margin="10 20 0 20">
                 <Button.Style>
                     <Style TargetType="Button" >
@@ -130,6 +131,10 @@
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Background" Value="#b52b39" />
                                 <Setter Property="Cursor" Value="Hand" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="LightGray" />
+                                <Setter Property="Foreground" Value="Gray" />
                             </Trigger>
                         </Style.Triggers>
                     </Style>

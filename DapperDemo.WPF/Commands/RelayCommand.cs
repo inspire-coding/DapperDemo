@@ -23,7 +23,8 @@ namespace DapperDemo.WPF.Commands
 
         public bool CanExecute(object parameter)
         {
-            return this.canExecute == null || this.canExecute(parameter);
+            bool result = this.canExecute == null || this.canExecute(parameter);
+            return result;
         }
 
         public void Execute(object parameter)

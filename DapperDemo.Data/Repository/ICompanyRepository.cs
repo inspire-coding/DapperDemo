@@ -11,6 +11,6 @@ namespace DapperDemo.Data.Repository
 
         Task<Company> Add(Company company);
         Task<Company> Update(Company company);
-        void Remove(int id);
+        Task Remove(int id);
     }
 }

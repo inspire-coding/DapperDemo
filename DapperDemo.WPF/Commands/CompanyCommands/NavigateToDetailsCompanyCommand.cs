@@ -18,8 +18,8 @@ namespace DapperDemo.WPF.Commands.CompanyCommands
             _companyDetailsViewModel = companyDetailsViewModel;
             _navigator = navigator;
 
-            companyViewModel.PropertyChanged += CompanyViewModel_PropertyChanged;
-            _companyDetailsViewModel.PropertyChanged += CompanyViewModel_PropertyChanged;
+            companyViewModel.PropertyChanged += ViewModel_PropertyChanged;
+            companyDetailsViewModel.PropertyChanged += ViewModel_PropertyChanged;
         }
 
         public event EventHandler CanExecuteChanged;
@@ -35,7 +35,7 @@ namespace DapperDemo.WPF.Commands.CompanyCommands
             _navigator.CurrentViewModel = _companyDetailsViewModel;
         }
 
-        private void CompanyViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             CanExecuteChanged?.Invoke(this, new EventArgs());
         }

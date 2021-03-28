@@ -49,9 +49,9 @@ namespace DapperDemo.Data.Repository
             return db.Query<Company>("usp_GetAllCompany", commandType: CommandType.StoredProcedure).ToList();
         }
 
-        public void Remove(int id)
+        public async Task Remove(int id)
         {
-            db.Execute("usp_RemoveCompany", new { CompanyId = id }, commandType: CommandType.StoredProcedure);
+            await db.ExecuteAsync("usp_RemoveCompany", new { CompanyId = id }, commandType: CommandType.StoredProcedure);
         }
 
         public async Task<Company> Update(Company company)
