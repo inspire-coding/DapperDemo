@@ -93,6 +93,7 @@ namespace DapperDemo.WPF.HostBuilders
         {
             return new UpsertEmployeeViewModel(
                 services.GetRequiredService<IEmployeeRepository>(),
+                services.GetRequiredService<ICompanyRepository>(),
                 services.GetRequiredService<ViewModelDelegateRenavigator<EmployeesViewModel>>());
         }
     }

@@ -3,15 +3,25 @@ using DapperDemo.Data.Repository;
 using DapperDemo.WPF.Commands.CompanyCommands;
 using DapperDemo.WPF.State.Navigators;
 using DapperDemo.WPF.Utils;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 
 namespace DapperDemo.WPF.ViewModels.EmployeeVM
 {
     public class UpsertEmployeeViewModel : ViewModelBase
     {
+        private readonly ICompanyRepository _companyRepo;
+
+
+        private readonly ObservableCollection<Company> _companies;
+        public IEnumerable<Company> Companies => _companies;
+
+
+
+
+
         private string _name;
         public string Name
         {
@@ -20,8 +30,7 @@ namespace DapperDemo.WPF.ViewModels.EmployeeVM
             {
                 _name = value;
                 OnPorpertyChanged(nameof(Name));
-                OnPorpertyChanged(nameof(CanAddCompany));
-                OnPorpertyChanged(nameof(Company));
+                OnPorpertyChanged(nameof(CanAddEmployee));
             }
         }
 
@@ -33,8 +42,7 @@ namespace DapperDemo.WPF.ViewModels.EmployeeVM
             {
                 _email = value;
                 OnPorpertyChanged(nameof(Email));
-                OnPorpertyChanged(nameof(CanAddCompany));
-                OnPorpertyChanged(nameof(Company));
+                OnPorpertyChanged(nameof(CanAddEmployee));
             }
         }
 
@@ -46,8 +54,7 @@ namespace DapperDemo.WPF.ViewModels.EmployeeVM
             {
                 _phone = value;
                 OnPorpertyChanged(nameof(Phone));
-                OnPorpertyChanged(nameof(CanAddCompany));
-                OnPorpertyChanged(nameof(Company));
+                OnPorpertyChanged(nameof(CanAddEmployee));
             }
         }
 
@@ -59,21 +66,19 @@ namespace DapperDemo.WPF.ViewModels.EmployeeVM
             {
                 _title = value;
                 OnPorpertyChanged(nameof(Title));
-                OnPorpertyChanged(nameof(CanAddCompany));
-                OnPorpertyChanged(nameof(Company));
+                OnPorpertyChanged(nameof(CanAddEmployee));
             }
         }
 
-        private Company _company;
-        public Company Company
+        private Company _selectedCompany;
+        public Company SelectedCompany
         {
-            get { return _company; }
+            get { return _selectedCompany; }
             set
             {
-                _company = value;
-                OnPorpertyChanged(nameof(Company));
-                OnPorpertyChanged(nameof(CanAddCompany));
-                OnPorpertyChanged(nameof(Company));
+                _selectedCompany = value;
+                OnPorpertyChanged(nameof(SelectedCompany));
+                OnPorpertyChanged(nameof(CanAddEmployee));
             }
         }
 
@@ -85,7 +90,6 @@ namespace DapperDemo.WPF.ViewModels.EmployeeVM
             {
                 _selectedEmployee = value;
                 if (_selectedEmployee != null) UpdateProperties(_selectedEmployee);
-                OnPorpertyChanged(nameof(SelectedEmployee));
 
                 if (_selectedEmployee == null)
                 {
@@ -99,6 +103,9 @@ namespace DapperDemo.WPF.ViewModels.EmployeeVM
                 }
                 OnPorpertyChanged(nameof(UpsertAction));
                 OnPorpertyChanged(nameof(UpsertActionTitle));
+                OnPorpertyChanged(nameof(SelectedEmployee));
+                OnPorpertyChanged(nameof(SelectedCompany));
+                OnPorpertyChanged(nameof(CanAddEmployee));
             }
         }
 
@@ -125,8 +132,8 @@ namespace DapperDemo.WPF.ViewModels.EmployeeVM
         }
 
 
-        public Employee Employee => CompanyFactory();
-        private Employee CompanyFactory()
+        public Employee Employee => EmployeeFactory();
+        private Employee EmployeeFactory()
         {
             return new Employee()
             {
@@ -134,35 +141,64 @@ namespace DapperDemo.WPF.ViewModels.EmployeeVM
                 Email = this.Email,
                 Phone = this.Phone,
                 Title = this.Title,
-                Company = this.Company
+                Company = SelectedCompany
             };
         }
 
-        public bool CanAddCompany => !string.IsNullOrEmpty(Name)
+
+        public bool CanAddEmployee => !string.IsNullOrEmpty(Name)
             && !string.IsNullOrEmpty(Email)
             && !string.IsNullOrEmpty(Phone)
-            && !string.IsNullOrEmpty(Title);
-            //&& !string.IsNullOrEmpty(Company);
+            && !string.IsNullOrEmpty(Title)
+            && SelectedCompany != null;
+
+
+
+
 
         public ICommand BackToCompanyListCommand { get; }
         public ICommand UpsertCompanyCommand { get; }
 
 
-        public UpsertEmployeeViewModel(IEmployeeRepository employeeRepo, IRenavigator navigateBackToCompanyView)
+
+
+
+        public UpsertEmployeeViewModel(IEmployeeRepository employeeRepo, ICompanyRepository companyRepo, IRenavigator navigateBackToCompanyView)
         {
+            _companyRepo = companyRepo;
+
+            _companies = new ObservableCollection<Company>();
+
+            UploadCompaniesComboBox();
+
             BackToCompanyListCommand = new BackToEmployeeListCommand(this, navigateBackToCompanyView);
             UpsertCompanyCommand = new UpsertEmployeeCommand(this, employeeRepo, UpsertAction, navigateBackToCompanyView);
 
             UpsertActionTitle = UpsertAction.Add.ToString();
         }
 
-        private void UpdateProperties(Employee selectedCompany)
+
+
+
+        private void UpdateProperties(Employee selectedEmployee)
         {
-            _name = selectedCompany.Name;
-            _email = selectedCompany.Email;
-            _phone = selectedCompany.Phone;
-            _title = selectedCompany.Title;
-            //_company = selectedCompany.CompanyId;
+            _name = selectedEmployee.Name;
+            _email = selectedEmployee.Email;
+            _phone = selectedEmployee.Phone;
+            _title = selectedEmployee.Title;
+
+            _selectedCompany = _companies
+                .Where(company => company.CompanyId == selectedEmployee.CompanyId)
+                .FirstOrDefault();
+        }
+
+        private void UploadCompaniesComboBox()
+        {
+            IEnumerable<Company> companyList = _companyRepo.GetAll();
+            foreach (Company item in companyList)
+            {
+                _companies.Add(item);
+            }
         }
     }
 }

@@ -29,19 +29,19 @@ namespace DapperDemo.WPF.Commands.CompanyCommands
 
         public bool CanExecute(object parameter)
         {
-            return true; // upsertEmployeeViewModel.CanAddCompany;
+            return _upsertEmployeeViewModel.CanAddEmployee;
         }
 
         public async void Execute(object parameter)
         {
             switch (_upsertAction)
             {
-                //case UpsertAction.Add:
-                //    await _employeeRepo.Add(_upsertEmployeeViewModel.Company);
-                //    break;
-                //case UpsertAction.Update:
-                //    await _employeeRepo.Update(_upsertEmployeeViewModel.Company);
-                //    break;
+                case UpsertAction.Add:
+                    await _employeeRepo.AddAsync(_upsertEmployeeViewModel.Employee);
+                    break;
+                case UpsertAction.Update:
+                    await _employeeRepo.Update(_upsertEmployeeViewModel.Employee);
+                    break;
                 default:
                     break;
             }

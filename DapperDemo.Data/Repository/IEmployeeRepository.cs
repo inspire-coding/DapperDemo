@@ -11,7 +11,7 @@ namespace DapperDemo.Data.Repository
 
         Employee Add(Employee employee);
         Task<Employee> AddAsync(Employee employee);
-        Employee Update(Employee employee);
+        Task<Employee> Update(Employee employee);
         Task Remove(int id);
     }
 }

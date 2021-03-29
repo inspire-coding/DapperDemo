@@ -66,12 +66,12 @@ namespace DapperDemo.Data.Repository
             return;
         }
 
-        public Employee Update(Employee employee)
+        public async Task<Employee> Update(Employee employee)
         {
             var sql = "UPDATE Employees SET Name = @Name, Title = @Title, Email = @Email, Phone = @Phone, CompanyId = @CompanyId "
                 + "WHERE EmployeeId = @EmployeeId";
 
-            db.Execute(sql, employee);
+            await db.ExecuteAsync(sql, employee);
 
             return null;
         }
