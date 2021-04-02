@@ -23,7 +23,6 @@
 
 
             <Grid Grid.Row="0" MaxWidth="1600" >
-
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="auto" />
@@ -45,8 +44,6 @@
                         </Style>
                     </TextBlock.Style>
                 </TextBlock>
-
-
 
                 <Button Content="Home"
                    Grid.Row="0"
@@ -117,8 +114,6 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-
-
 
                 <Button Content="Employee"
                    Grid.Row="0"

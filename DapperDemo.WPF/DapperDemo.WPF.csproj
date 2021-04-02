@@ -8,6 +8,12 @@
 
   <ItemGroup>
     <None Remove="appsettings.json" />
+    <None Remove="Assets\cancel_black.png" />
+    <None Remove="Assets\cancel_red.png" />
+    <None Remove="Assets\hamburger_button_blue.png" />
+    <None Remove="Assets\hamburger_button_darkblue.png" />
+    <None Remove="Assets\tgBtn_default.png" />
+    <None Remove="Assets\tgBtn_MouseOver.png" />
     <None Remove="Images\cancel.png" />
     <None Remove="Images\cancel_darkred.png" />
     <None Remove="Images\warning.png" />
@@ -37,6 +43,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\cancel_black.png" />
+    <Resource Include="Assets\cancel_red.png" />
+    <Resource Include="Assets\hamburger_button_blue.png" />
+    <Resource Include="Assets\hamburger_button_darkblue.png" />
+    <Resource Include="Assets\tgBtn_default.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\tgBtn_MouseOver.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\cancel.png" />
     <Resource Include="Images\cancel_darkred.png" />
     <Resource Include="Images\warning.png" />

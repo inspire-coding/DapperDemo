@@ -5,23 +5,273 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DapperDemo.WPF"
         xmlns:controls="clr-namespace:DapperDemo.WPF.Controls"
+        xmlns:nav="clr-namespace:DapperDemo.WPF.State.Navigators"
+        xmlns:viewmodels="clr-namespace:DapperDemo.WPF.ViewModels"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         Title="MainWindow" Height="800" Width="1200">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="100" Height="25"
+                                CornerRadius="12"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True" >
+                    <Setter Property="Foreground" Value="Blue" />
+                    <Setter Property="Background" Value="White" />
+                </Trigger>
+                <EventTrigger RoutedEvent="MouseEnter" >
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetProperty="FontSize" To="14" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Duration="0:0:0.100" Storyboard.TargetProperty="FontSize" To="12" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="Width" Value="100"/>
+                    <Setter Property="Height" Value="25"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+
+        <ImageBrush x:Key="tb_mouse_over" ImageSource="/Assets/hamburger_button_darkblue.png"/>
+        <Style x:Key="tb_style" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Border  x:Name="border"
+                                 BorderThickness="{TemplateBinding BorderThickness}"
+                                 Background="{TemplateBinding Background}"
+                                 SnapsToDevicePixels="True">
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background"
+                                        TargetName="border"
+                                        Value="{StaticResource tb_mouse_over}"/>
+                                <Setter Property="BorderBrush"
+                                        TargetName="border"
+                                        Value="{StaticResource tb_mouse_over}"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter Property="Background"
+                                        TargetName="border"
+                                        Value="{StaticResource tb_mouse_over}"/>
+                                <Setter Property="BorderBrush"
+                                        TargetName="border"
+                                        Value="{StaticResource tb_mouse_over}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="600*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <controls:NavigationBar 
-            Grid.Row="0" 
-            MouseDown="NavigationBar_MouseDown"
-            MouseDoubleClick="NavigationBar_MouseDoubleClick" />
+        <StackPanel x:Name="nav_pnl" Grid.Row="0" Grid.RowSpan="2"
+                    HorizontalAlignment="Left"
+                    Orientation="Vertical"
+                    Width="0"
+                    Panel.ZIndex="1"
+                    Background="AliceBlue">
+            <Image Width="24" Height="24"
+                   Cursor="Hand" Margin="12"
+                   HorizontalAlignment="Right"
+                   ToolTip="Close"
+                   RenderOptions.BitmapScalingMode="Fant" >
+                <Image.Style>
+                    <Style TargetType="Image">
+                        <Setter Property="Image.Source" Value="/Assets/cancel_black.png" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Image.Source" Value="/Assets/cancel_red.png" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+                <Image.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding CloseNavigationDrawerComamnd, Mode=OneTime}" />
+                </Image.InputBindings>
+            </Image>
+        </StackPanel>
+
+        <Border Grid.Row="0" Grid.Column="0"
+                VerticalAlignment="Top" Margin="-2 -5 -5 15"
+                Background="White"
+                MouseDown="NavigationBar_MouseDown"
+                IsEnabled="{Binding IsEnabled}"
+                BorderThickness="3"  >
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="20" Color="LightGray" />
+            </Border.Effect>
+
+            <Grid RenderOptions.EdgeMode="Aliased" Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" MaxWidth="1600" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <ToggleButton
+                        x:Name="Tg_Btn"
+                        Grid.Column="0"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        Height="24"
+                        Width="24"
+                        BorderThickness="0"
+                        IsChecked="{Binding IsChecked}"
+                        Style="{StaticResource tb_style}"  >
+
+                        <!--// Toggle button default background image //-->
+                        <ToggleButton.Background>
+                            <ImageBrush ImageSource="/Assets/hamburger_button_blue.png"
+                                            Stretch="None"/>
+                        </ToggleButton.Background>
+
+                        <!--// Toggle Button - Checked, Unchecked events //-->
+                        <ToggleButton.Triggers>
+                            <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="HideStackPanel">
+                                        <DoubleAnimation                                                
+                                                Storyboard.TargetName="nav_pnl"
+                                                Storyboard.TargetProperty="Width"
+                                                BeginTime="0:0:0"
+                                                From="230" To="0"
+                                                Duration="0:0:0.2">
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="ShowStackPanel">
+                                        <DoubleAnimation                                                
+                                                Storyboard.TargetName="nav_pnl"
+                                                Storyboard.TargetProperty="Width"
+                                                BeginTime="0:0:0"
+                                                From="0" To="230"
+                                                Duration="0:0:0.3">
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </ToggleButton.Triggers>
+                    </ToggleButton>
+
+                    <Button Content="Home"
+                           Grid.Row="0"
+                           Grid.Column="1"
+                           Margin="30 0 0 0"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           FontWeight="Medium"
+                           FontSize="12"
+                           Command="{Binding UpdateCurrentViewModelCommand}"
+                           CommandParameter="{x:Static nav:ViewType.Home}" />
+                    <Button Content="Company"
+                           Grid.Row="0"
+                           Grid.Column="2"
+                           Margin="30 0 0 0"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           FontWeight="Medium"
+                           FontSize="12"
+                           Command="{Binding UpdateCurrentViewModelCommand}"
+                           CommandParameter="{x:Static nav:ViewType.Company}" />
+                    <Button Content="Employee"
+                           Grid.Row="0"
+                           Grid.Column="3"
+                           Margin="30 0 0 0"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           FontWeight="Medium"
+                           FontSize="12" 
+                           Command="{Binding UpdateCurrentViewModelCommand}"
+                           CommandParameter="{x:Static nav:ViewType.Employees}" />
+
+                    <Button Grid.Column="6" Grid.Row="0" HorizontalAlignment="Right"
+                            Command="{Binding CloseComamnd}">
+                        <Button.Style>
+                            <Style TargetType="Button" >
+                                <Setter Property="Background" Value="White" />
+                                <Setter Property="BorderThickness" Value="0" />
+                                <Setter Property="Cursor" Value="Hand" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True" >
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Image Width="32" Height="32"                        
+                       RenderOptions.BitmapScalingMode="Fant" >
+                            <Image.Style>
+                                <Style TargetType="Image">
+                                    <Setter Property="Image.Source" Value="/Images/cancel.png" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Image.Source" Value="/Images/cancel_darkred.png" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </Button>
+
+                </Grid>
+            </Grid>
+        </Border>
 
         <ScrollViewer Grid.Row="1"
                       VerticalScrollBarVisibility="Auto"
+                      Opacity="{Binding Opacity}"
+                      IsEnabled="{Binding IsEnabled}"
                       HorizontalScrollBarVisibility="Disabled">
             <ContentControl Content="{Binding CurrentViewModel}" />
         </ScrollViewer>
